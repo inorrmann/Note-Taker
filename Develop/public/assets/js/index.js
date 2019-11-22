@@ -25,7 +25,6 @@ var saveNote = function (note) {
   });
 };
 
-// THIS ONE ISN'T SET UP YET!!!
 // A function for deleting a note from the db
 var deleteNote = function (id) {
   return $.ajax({
@@ -34,7 +33,7 @@ var deleteNote = function (id) {
   });
 };
 
-// THIS ISN'T WORKING YET!!!
+
 // If there is an activeNote, display it, otherwise render 
 // empty inputs
 var renderActiveNote = function () {
@@ -68,7 +67,6 @@ var handleNoteSave = function () {
   });
 };
 
-// THIS ISN'T WORKING YET !!!
 // Delete the clicked note
 var handleNoteDelete = function (event) {
   // prevents the click listener for the list from being called 
@@ -79,14 +77,17 @@ var handleNoteDelete = function (event) {
     .parent(".list-group-item")
     .data();
 
-  if (activeNote.id === note.id) {
-    activeNote = {};
-  }
+
+  // HAVE NO IDEA WHAT THIS IS DOING, SO IT'S GOING AWAY
+  // if (activeNote.id === note.id) {
+  //   activeNote = {};
+  // }
 
   deleteNote(note.id).then(function () {
     getAndRenderNotes();
     renderActiveNote();
   });
+
 };
 
 // Sets the activeNote and displays it
@@ -95,7 +96,6 @@ var handleNoteView = function () {
   renderActiveNote();
 };
 
-// THIS ISN'T WORKING YET!!!
 // Sets the activeNote to an empty object and allows 
 // the user to enter a new note
 var handleNewNoteView = function () {
@@ -116,7 +116,7 @@ var handleRenderSaveBtn = function () {
 
 // Render's the list of note titles
 var renderNoteList = function (notes) {
-    
+
   $noteList.empty();
 
   var noteListItems = [];

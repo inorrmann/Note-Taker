@@ -8,6 +8,16 @@ module.exports = function (app) {
         return res.sendFile(path.join(__dirname, "./db/db.json"));
     });
 
+
+    // saves all notes to json file (for POST and DELETE)
+    function writeNotes(notes) {
+        fs.writeFile("./db/db.json", JSON.stringify(notes), function (err) {
+            if (err) throw err;
+            console.log("Notes saved!");
+        });
+    };
+
+
     // *** POST NEW NOTES ***
     app.post("/api/notes", function (req, res) {
         let newNote = req.body;
@@ -22,35 +32,26 @@ module.exports = function (app) {
             };
             writeNotes(storedNotes);
         });
-
-        // saved all notes to json file
-        function writeNotes(notes) {
-            fs.writeFile("./db/db.json", JSON.stringify(notes), function (err) {
-                if (err) throw err;
-                console.log("Notes saved!");
-            });
-        };
-
         res.json(true)
     });
 
 
     app.delete("/api/notes/:id", function (req, res) {
-        let newStoredNotes;
+        let deletedNote = req.params.id
+
         fs.readFile("./db/db.json", "utf-8", function (err, data) {
             if (err) throw err;
-            // find the object with the id requested
-            // delete it from the array
-            // return new array without the deleted object
-            // which means that at some point this object needs to be declared
+
+            let storedNotes = JSON.parse(data)
+            storedNotes.splice(deletedNote - 1, 1);
+            // restore ids for all elements of the array
+            for (i = 0; i < storedNotes.length; i++) {
+                storedNotes[i].id = i + 1;
+            };
+        
             console.log("object deleted!")
-            return newStoredNotes;
+            writeNotes(storedNotes);
         });
-        fs.writeFile("./db/db.json", newStoredNotes, function (err) {
-            if (err) throw err;
-            console.log("remaining objects appended!");
-        });
-        // return the new note to the client?
         res.json(true)
     });
 
