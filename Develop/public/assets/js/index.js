@@ -9,6 +9,7 @@ var activeNote = {};
 
 // A function for getting all notes from the db
 var getNotes = function () {
+  console.log("getNotes passed through")
   return $.ajax({
     url: "/api/notes",
     method: "GET"
@@ -32,7 +33,8 @@ var deleteNote = function (id) {
   });
 };
 
-// If there is an activeNote, display it, otherwise render empty inputs
+// If there is an activeNote, display it, otherwise render 
+// empty inputs
 var renderActiveNote = function () {
   $saveNoteBtn.hide();
 
@@ -49,7 +51,8 @@ var renderActiveNote = function () {
   }
 };
 
-// Get the note data from the inputs, save it to the db and update the view
+// Get the note data from the inputs, save it to the db and 
+// update the view
 var handleNoteSave = function () {
   var newNote = {
     title: $noteTitle.val(),
@@ -64,7 +67,8 @@ var handleNoteSave = function () {
 
 // Delete the clicked note
 var handleNoteDelete = function (event) {
-  // prevents the click listener for the list from being called when the button inside of it is clicked
+  // prevents the click listener for the list from being called 
+  // when the button inside of it is clicked
   event.stopPropagation();
 
   var note = $(this)
@@ -87,7 +91,8 @@ var handleNoteView = function () {
   renderActiveNote();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeNote to and empty object and allows 
+// the user to enter a new note
 var handleNewNoteView = function () {
   activeNote = {};
   renderActiveNote();
@@ -103,8 +108,11 @@ var handleRenderSaveBtn = function () {
   }
 };
 
+
+// *** PRINT NOTES ON THE LEFT SIDE OF SCREEN ***
 // Render's the list of note titles
 var renderNoteList = function (notes) {
+    
   $noteList.empty();
 
   var noteListItems = [];
@@ -123,9 +131,13 @@ var renderNoteList = function (notes) {
   $noteList.append(noteListItems);
 };
 
+
+// *** GET SAVED NOTES & CALL FUNCTION TO PRINT ***
 // Gets notes from the db and renders them to the sidebar
 var getAndRenderNotes = function () {
   return getNotes().then(function (data) {
+    console.log("get was passed")
+    console.log(data);
     renderNoteList(data);
   });
 };
