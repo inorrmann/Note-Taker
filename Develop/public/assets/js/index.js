@@ -25,6 +25,7 @@ var saveNote = function (note) {
   });
 };
 
+// THIS ONE ISN'T SET UP YET!!!
 // A function for deleting a note from the db
 var deleteNote = function (id) {
   return $.ajax({
@@ -33,6 +34,7 @@ var deleteNote = function (id) {
   });
 };
 
+// THIS ISN'T WORKING YET!!!
 // If there is an activeNote, display it, otherwise render 
 // empty inputs
 var renderActiveNote = function () {
@@ -51,6 +53,7 @@ var renderActiveNote = function () {
   }
 };
 
+
 // Get the note data from the inputs, save it to the db and 
 // update the view
 var handleNoteSave = function () {
@@ -65,6 +68,7 @@ var handleNoteSave = function () {
   });
 };
 
+// THIS ISN'T WORKING YET !!!
 // Delete the clicked note
 var handleNoteDelete = function (event) {
   // prevents the click listener for the list from being called 
@@ -91,7 +95,8 @@ var handleNoteView = function () {
   renderActiveNote();
 };
 
-// Sets the activeNote to and empty object and allows 
+// THIS ISN'T WORKING YET!!!
+// Sets the activeNote to an empty object and allows 
 // the user to enter a new note
 var handleNewNoteView = function () {
   activeNote = {};
@@ -109,7 +114,6 @@ var handleRenderSaveBtn = function () {
 };
 
 
-// *** PRINT NOTES ON THE LEFT SIDE OF SCREEN ***
 // Render's the list of note titles
 var renderNoteList = function (notes) {
     
@@ -132,7 +136,6 @@ var renderNoteList = function (notes) {
 };
 
 
-// *** GET SAVED NOTES & CALL FUNCTION TO PRINT ***
 // Gets notes from the db and renders them to the sidebar
 var getAndRenderNotes = function () {
   return getNotes().then(function (data) {
